@@ -92,21 +92,67 @@ public class LinkedList {
       head = new_node;
       return;
     }
-
     if (pos < 1 || pos > size + 1)
     {
       System.out.println("Invalid position");
       return;
     }
+    if(pos == 1){
+      new_node.next = head;
+      head = new_node;
 
+      size++;
+      return;
+    }
     Node curr = head;
     for(int i = 1 ; i < pos-1 ; i++){
       curr = curr.next;
     }
-
     new_node.next = curr.next;
     curr.next = new_node;
     size++;
+  }
+
+  void printMax(){
+    int max = head.val;
+    Node curr = head.next;
+
+    while(curr != null){
+      if(curr.val > max){
+        max = curr.val;
+      }
+      curr = curr.next;
+    }
+
+    System.out.println("Max Number in LL is : " + max);
+  }
+
+
+
+  void deleteAtGiven(int pos){
+    if (head == null) {
+      System.out.println("LinkedList is Already Empty !!");
+      return;
+    }
+
+    if(pos < 1 || pos > size + 1){
+      System.out.println("Invalid Posistion");
+      return;
+    }
+
+    if(pos == 1){
+      head = head.next;
+      size--;
+      return;
+    }
+
+    Node curr = head;
+    for(int i = 1 ; i < pos-1 ; i++){
+        curr = curr.next;
+    }
+    
+    curr.next = curr.next.next;
+     size--;
   }
 
 
@@ -119,11 +165,12 @@ public class LinkedList {
     ll.insertAtLast(30);
     ll.insertAtLast(40);
     ll.insertAtLast(50);
-    ll.print();
-    System.out.println();
-    ll.insertAtGiven(15, 7);
+    // ll.deleteAtGiven(1);
+    ll.insertAtGiven(5, 1);
+    ll.deleteGivenVal(30);
 
     ll.print();
+    // ll.printMax();
 
   }
 }
