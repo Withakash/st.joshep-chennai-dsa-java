@@ -1,5 +1,6 @@
 public class LinkedList {
   Node head;
+  int size = 0;
 
   static class Node {
     int val;
@@ -29,6 +30,7 @@ public class LinkedList {
     }
     new_node.next = head;
     head = new_node;
+    size++;
   }
 
   void insertAtLast(int val){
@@ -43,6 +45,7 @@ public class LinkedList {
     }
 
     curr.next = new_node;
+    size++;
   }
 
   void deleteAtFirst(){
@@ -52,6 +55,7 @@ public class LinkedList {
     }
 
      head = head.next;
+     size--;
   }
 
 
@@ -67,17 +71,57 @@ public class LinkedList {
     }
 
     curr.next = null;
+    size--;
   }
+
+  void linkedListSum(){
+      Node curr = head;
+      int res = 0;
+      while(curr != null){
+         res = res + curr.val;
+         curr = curr.next;
+      }
+
+      System.out.println(res);
+      
+  }
+
+  void insertAtGiven(int val,int pos){
+    Node new_node = new Node(val);
+    if (head == null) {
+      head = new_node;
+      return;
+    }
+
+    if (pos < 1 || pos > size + 1)
+    {
+      System.out.println("Invalid position");
+      return;
+    }
+
+    Node curr = head;
+    for(int i = 1 ; i < pos-1 ; i++){
+      curr = curr.next;
+    }
+
+    new_node.next = curr.next;
+    curr.next = new_node;
+    size++;
+  }
+
+
+
 
   public static void main(String[] args) {
     LinkedList ll = new LinkedList();
-    ll.insertAtFirst(10);
-    ll.insertAtFirst(20);
-    ll.insertAtFirst(30);
-    ll.deleteAtFirst();
-    ll.insertAtLast(44);
-    ll.insertAtLast(55);
-    ll.deleteAtLast();
+    ll.insertAtLast(10);
+    ll.insertAtLast(20);
+    ll.insertAtLast(30);
+    ll.insertAtLast(40);
+    ll.insertAtLast(50);
+    ll.print();
+    System.out.println();
+    ll.insertAtGiven(15, 7);
 
     ll.print();
 
